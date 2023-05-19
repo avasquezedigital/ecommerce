@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+
 import { useRoutes, BrowserRouter } from "react-router-dom";
 import Home from '../Pages/Home';
 import NotFound from '../Pages/NotFound'
@@ -41,9 +41,11 @@ const AppRoutes = () => {
 }
 
 function Router() {
-    return <BrowserRouter>
-        <AppRoutes />
-    </BrowserRouter>;
+    return (
+        <BrowserRouter>
+            <AppRoutes />
+        </BrowserRouter>
+    );
 }
 
 export default Router
