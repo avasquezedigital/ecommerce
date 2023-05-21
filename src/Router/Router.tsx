@@ -6,7 +6,8 @@ import Account from '../Pages/Account'
 import MyOrders from '../Pages/Orders/MyOrders'
 import Order from '../Pages/Orders/Order'
 import SignIn from '../Pages/SignIn'
-import Shoppi from "../Pages/Categories/Shoppi";
+import Categories from "../Pages/Categories";
+import { ShoppingCartProvider } from "../context/Context";
 
 
 type Route = {
@@ -22,8 +23,8 @@ const AppRoutes = () => {
             element: <Home />
         },
         {
-            path: "/shoppi",
-            element: <Shoppi />
+            path: "/categories",
+            element: <Categories />
         },
         {
             path: 'account',
@@ -53,9 +54,11 @@ const AppRoutes = () => {
 
 function Router() {
     return (
-        <BrowserRouter>
-            <AppRoutes />
-        </BrowserRouter>
+        <ShoppingCartProvider>
+            <BrowserRouter>
+                <AppRoutes />
+            </BrowserRouter>
+        </ShoppingCartProvider>
     );
 }
 

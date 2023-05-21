@@ -8,8 +8,8 @@ function Navbar(): JSX.Element {
       text: "Inicio",
     },
     {
-      to: "/shoppi",
-      text: "Shoppi",
+      to: "/categories",
+      text: "Categories",
     },
     {
       to: "/all",

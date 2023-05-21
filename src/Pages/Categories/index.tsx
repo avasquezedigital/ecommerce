@@ -1,11 +1,11 @@
 import React from 'react'
 import Layout from '../../layout/Layout'
 
-function Shoppi(): React.JSX.Element {
+function Categories(): React.JSX.Element {
     return (
-        <Layout title="Shoppi">
+        <Layout title="Categories">
         </Layout>
     )
 }
 
-export default Shoppi
+export default Categories
