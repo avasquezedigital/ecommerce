@@ -1,11 +1,9 @@
-import Header from "../../components/Header"
+import Layout from "../../layout/Layout"
 
 function Home() {
   return (
-    <div className="bg-slate-100 px-10">
-      <Header />
-      Home
-    </div>
+    <Layout title="Home">
+    </Layout>
   )
 }
 

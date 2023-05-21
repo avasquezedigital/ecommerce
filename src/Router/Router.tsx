@@ -6,13 +6,24 @@ import Account from '../Pages/Account'
 import MyOrders from '../Pages/Orders/MyOrders'
 import Order from '../Pages/Orders/Order'
 import SignIn from '../Pages/SignIn'
+import Shoppi from "../Pages/Categories/Shoppi";
 
+
+type Route = {
+    path: string,
+    element: JSX.Element,
+    children?: Route[]
+}
 
 const AppRoutes = () => {
     const routes: Route[] = [
         {
             path: "/",
             element: <Home />
+        },
+        {
+            path: "/shoppi",
+            element: <Shoppi />
         },
         {
             path: 'account',
