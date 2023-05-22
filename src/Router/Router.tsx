@@ -7,7 +7,7 @@ import MyOrders from '../Pages/Orders/MyOrders'
 import Order from '../Pages/Orders/Order'
 import SignIn from '../Pages/SignIn'
 import Categories from "../Pages/Categories";
-import { ShoppingCartProvider } from "../context/Context";
+import ShoppingCartProvider  from "../context/ShoppingCartProvider";
 
 
 type Route = {
