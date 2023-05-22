@@ -1,45 +1,40 @@
-import { useReducer } from "react";
-import ShoppingCartContext from './';
-import { ShoppingCartState } from "./interfaces";
-import { shoppingCartReducer } from "./shoppingCartReducer";
-
-const defaultProducts: Product[] = [
-    {
-        id: 1,
-        title: "Handmade Fresh Table",
-        price: 687,
-        description: "Andy shoes are designed to keeping in...",
-        category: {
-            id: 5,
-            name: "Others",
-            image: "https://placeimg.com/640/480/any?r=0.591926261873231"
-        },
-        images: [
-            "https://placeimg.com/640/480/any?r=0.9178516507833767",
-            "https://placeimg.com/640/480/any?r=0.9300320592588625",
-            "https://placeimg.com/640/480/any?r=0.8807778235430017"
-        ]
-    }
-];
-
-const INITIAL_STATE: ShoppingCartState = {
-    products: defaultProducts,
-    cart: []
-}
+import { useState } from 'react';
+import ShoppingCartContext from './Context';
+import { INITIAL_STATE } from '../utils/initial_values';
 
 type ProviderProps = {
     children: React.JSX.Element | React.JSX.Element[]
 }
 
+export interface ProductDetail {
+    isOpen: boolean,
+    details: Product
+}
+
 const ShoppingCartProvider = ({ children }: ProviderProps) => {
-    const [shoppingCartState, dispatch] = useReducer(shoppingCartReducer, INITIAL_STATE);
-    const updateProducts = (products: Product[]) => {
-        dispatch({ type: 'allProducts', payload: products });
+    const [cartProducts, setCartProducts] = useState<Product[]>([]);
+    const [products, setProducts] = useState<Product[]>(INITIAL_STATE);
+    const [productDetail, setProductDetail] = useState<ProductDetail>({
+        isOpen: false,
+        details: products[0]
+    })
+    const openProductDetail = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, product: Product) => {
+        e.stopPropagation();
+        setProductDetail({ isOpen: true, details: product });
     }
+    const closeProductDetails = () => {
+        setProductDetail({ isOpen: false, details: products[0] });
+    }
+
     return (
         <ShoppingCartContext.Provider value={{
-            shoppingCartState,
-            updateProducts
+            products,
+            setProducts,
+            cartProducts,
+            setCartProducts,
+            productDetail,
+            openProductDetail,
+            closeProductDetails
         }}>
             {children}
         </ShoppingCartContext.Provider>
