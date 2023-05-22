@@ -4,11 +4,18 @@ import { ProductDetail } from "./ShoppingCartProvider";
 export interface ShoppingCart {
     products: Product[],
     setProducts: React.Dispatch<React.SetStateAction<Product[]>>,
+    cartOpen: boolean,
     cartProducts: Product[],
     setCartProducts: React.Dispatch<React.SetStateAction<Product[]>>,
     productDetail: ProductDetail,
     openProductDetail: (e: any, product: Product) => void,
-    closeProductDetails: () => void
+    closeProductDetails: () => void,
+    addProductToCart: (e: React.MouseEvent<HTMLElement, MouseEvent>, product: Product) => void,
+    removeProductToCart: (e: React.MouseEvent<HTMLElement, MouseEvent>, id: number) => void,
+    clearCart: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
+    toggleCart: (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void,
+    totalPrice: number
+
 }
 
 const ShoppingCartContext = createContext<ShoppingCart>({} as ShoppingCart);

@@ -21,6 +21,18 @@ export const getProducts = async (path: string = 'products') => {
         const dataProducts = await response.json();
         const sortProducts = dataProducts.sort((a: Product, b: Product) => a.id - b.id);
         const copyData = [...sortProducts];
+        const dataAPI = copyData.map((p: Product) => {
+            let newProduct: Product = {
+                id: p.id,
+                title: p.title.trim(),
+                description: p.description,
+                images: ['https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 'https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 'https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'],
+                price: 231000,
+                category: p.category,
+                state: 'default'
+            }
+            return newProduct;
+        });
         const dataBeauty = copyData.map((p: Product) => {
             let newProduct: Product = {
                 id: p.id,
@@ -33,7 +45,7 @@ export const getProducts = async (path: string = 'products') => {
             }
             return newProduct;
         })
-        return dataBeauty
+        return dataAPI
     } catch (error) {
         console.log(error);
         return [
