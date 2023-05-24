@@ -20,10 +20,16 @@ const ShoppingCartProvider = ({ children }: ProviderProps) => {
         isOpen: false,
         details: products[0]
     })
+    const [order, setOrder] = useState<Order>(
+        { products: [], totalProducts: 0, totalPrice: 0, date: new Date }
+    );
+    const [orders, setOrders] = useState<Order[]>([]);
+
     const openProductDetail = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, product: Product) => {
         e.stopPropagation();
         setProductDetail({ isOpen: true, details: product });
     }
+
     const closeProductDetails = () => {
         setProductDetail({ isOpen: false, details: products[0] });
     }
@@ -75,6 +81,19 @@ const ShoppingCartProvider = ({ children }: ProviderProps) => {
         setCartOpen(isOpen ? false : true)
     }
 
+    const checkoutOrder = (e: React.MouseEvent<HTMLElement, MouseEvent>, order: Order) => {
+        setOrder(order);
+        setOrders([...orders, order])
+        setCartOpen(false);
+        setCartProducts([]);
+        const updateProducts = [...products];
+        const defaultStateProducts = updateProducts.map(p => {
+            return { ...p, state: 'default' }
+        })
+        setProducts(defaultStateProducts);
+    }
+
+
     useEffect(() => {
         updateTotal();
     }, [addProductToCart, removeProductToCart])
@@ -94,7 +113,10 @@ const ShoppingCartProvider = ({ children }: ProviderProps) => {
             removeProductToCart,
             clearCart,
             toggleCart,
-            totalPrice
+            totalPrice,
+            checkoutOrder,
+            order,
+            orders
         }}>
             {children}
         </ShoppingCartContext.Provider>

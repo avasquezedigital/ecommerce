@@ -7,7 +7,7 @@ import MyOrders from '../Pages/Orders/MyOrders'
 import Order from '../Pages/Orders/Order'
 import SignIn from '../Pages/SignIn'
 import Categories from "../Pages/Categories";
-import ShoppingCartProvider  from "../context/ShoppingCartProvider";
+import ShoppingCartProvider from "../context/ShoppingCartProvider";
 
 
 type Route = {
@@ -27,18 +27,20 @@ const AppRoutes = () => {
             element: <Categories />
         },
         {
-            path: 'account',
+            path: '/account',
             element: <Account />,
         },
         {
-            path: 'my-orders',
+            path: '/my-orders',
             element: <MyOrders />,
-            children: [
-                {
-                    path: 'order',
-                    element: <Order />,
-                }
-            ]
+        },
+        {
+            path: '/my-order',
+            element: <Order />,
+        },
+        {
+            path: '/my-orders/last',
+            element: <Order />,
         },
         {
             path: '/sign-in',

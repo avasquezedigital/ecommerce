@@ -1,16 +1,17 @@
-import React, { useContext } from 'react'
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom'
 import ShoppingCartContext from '../../../../context/Context'
 import { XMarkIcon, MinusIcon } from '@heroicons/react/24/outline'
 
 
 function MiniCart() {
-    const { clearCart, cartOpen, cartProducts, toggleCart, removeProductToCart, totalPrice} = useContext(ShoppingCartContext);
+    const { clearCart, cartOpen, cartProducts, toggleCart, removeProductToCart, totalPrice, checkoutOrder, order } = useContext(ShoppingCartContext);
     return (
         <div className={
             ` ${cartOpen ? 'visible' : 'hidden'} flex flex-col gap-4 items-center absolute z-10 w-60 top-24 right-0 bg-slate-800 py-8 px- 4 rounded-xl drop-shadow-xl`
         }>
             <span onClick={e => toggleCart(e)}> <XMarkIcon className='absolute top-4 right-4 w-4 h-4 cursor-pointer bg-slate-400 rounded-full text-slate-800 grid place-content-center drop-shadow-xl' /> </span>
-            <ul className='h-[200px] overflow-y-auto p-6'>
+            <ul className={`${cartProducts.length > 0 ? 'visible' : 'hidden'} h-[200px] overflow-y-auto p-6`}>
                 {
                     cartProducts.length > 0
                         ?
@@ -29,15 +30,35 @@ function MiniCart() {
                         : <p> No hay productos añadidos</p>
                 }
             </ul>
-            <div className='flex flex-row justify-between w-full px-12'>
-                <h6>Total:</h6>
-                <span>{totalPrice}</span>
-            </div>
+
             {
-                cartProducts.length > 0 &&
-                <button onClick={clearCart} className="w-1/2 h-8 rounded-lg bg-lime-400 place-content-center flex flex-row gap-3 items-center transition-colors hover:bg-lime-200 text-sm font-semibold text-slate-800">
-                    Clear
-                </button>
+                cartProducts.length > 0 && (
+                    <>
+                        <div className='flex flex-row justify-between w-full px-8'>
+                            <h6>Total:</h6>
+                            <span>{totalPrice}</span>
+                        </div>
+
+                        <button onClick={clearCart} className="w-1/2 h-8 rounded-lg bg-slate-600 place-content-center flex flex-row gap-3 items-center transition-colors text-sm font-semibold text-slate-800">
+                            Clear
+                        </button>
+                        <button onClick={e => checkoutOrder(e, {
+                            products: cartProducts,
+                            totalPrice,
+                            totalProducts: cartProducts.length,
+                            date: new Date()
+                        })} className="w-1/2 h-8 rounded-lg bg-lime-400 place-content-center flex flex-row gap-3 items-center transition-colors hover:bg-lime-200 text-sm font-semibold text-slate-800">
+                            checkout
+                        </button>
+                    </>
+                )
+
+            }
+            {
+                order.products.length > 0 &&
+                <Link to={`/my-orders/last`} className="w-1/2 h-8 rounded-lg bg-slate-400 place-content-center flex flex-row gap-3 items-center transition-colors hover:bg-lime-200 text-sm font-semibold text-slate-800">
+                    My order
+                </Link>
             }
         </div>
     )

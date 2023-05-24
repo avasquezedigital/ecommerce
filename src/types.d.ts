@@ -18,3 +18,10 @@ interface Product {
     images: Array<string>,
     state: string
 }
+
+interface Order {
+    products: Product[] | [],
+    totalProducts: number,
+    totalPrice: number,
+    date: Date
+}

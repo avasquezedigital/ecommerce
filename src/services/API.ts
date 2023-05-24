@@ -24,10 +24,10 @@ export const getProducts = async (path: string = 'products') => {
         const dataAPI = copyData.map((p: Product) => {
             let newProduct: Product = {
                 id: p.id,
-                title: p.title.trim(),
+                title: p.title,
                 description: p.description,
-                images: ['https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 'https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 'https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'],
-                price: 231000,
+                images: p.images,
+                price: p.price,
                 category: p.category,
                 state: 'default'
             }
