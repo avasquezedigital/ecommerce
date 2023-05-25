@@ -20,8 +20,12 @@ interface Product {
 }
 
 interface Order {
+    id: string,
     products: Product[] | [],
     totalProducts: number,
     totalPrice: number,
     date: Date
 }
+
+
+

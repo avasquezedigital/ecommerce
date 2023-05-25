@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import ShoppingCartContext from './Context';
 import { INITIAL_STATE } from '../utils/initial_values';
+import { getProducts } from '../services/API';
 
 type ProviderProps = {
     children: React.JSX.Element | React.JSX.Element[]
@@ -21,7 +22,7 @@ const ShoppingCartProvider = ({ children }: ProviderProps) => {
         details: products[0]
     })
     const [order, setOrder] = useState<Order>(
-        { products: [], totalProducts: 0, totalPrice: 0, date: new Date }
+        { id: '', products: [], totalProducts: 0, totalPrice: 0, date: new Date }
     );
     const [orders, setOrders] = useState<Order[]>([]);
 
@@ -49,7 +50,6 @@ const ShoppingCartProvider = ({ children }: ProviderProps) => {
         updateProducts[indexProduct].state = 'added';
         setProducts([...updateProducts]);
         setCartProducts([...cartProducts, product])
-        setCartOpen(true)
     }
 
     const removeProductToCart = (e: React.MouseEvent<HTMLElement, MouseEvent>, id: number) => {
@@ -93,11 +93,23 @@ const ShoppingCartProvider = ({ children }: ProviderProps) => {
         setProducts(defaultStateProducts);
     }
 
+    const updateProducts = async () => {
+        try {
+            const dataProducts = await getProducts('products');
+            setProducts(dataProducts);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     useEffect(() => {
         updateTotal();
     }, [addProductToCart, removeProductToCart])
 
+    useEffect(() => {
+        updateProducts()
+        return () => {}
+    }, [])
 
     return (
         <ShoppingCartContext.Provider value={{

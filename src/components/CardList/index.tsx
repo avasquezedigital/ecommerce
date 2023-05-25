@@ -1,18 +1,49 @@
+import { useContext, useEffect, useState } from 'react';
+import ShoppingCartContext from '../../context/Context';
 import Card from './Card/Card'
 
-type Props = {
-    products: Product[]
-}
+function CardList() {
 
-function CardList({ products }: Props) {
+    const [searchTerm, setSearchTerm] = useState<string>('');
+    const { setProducts, products } = useContext(ShoppingCartContext);
+
+    const filterByTitle = () => {
+        const defaultProducts = [...products];
+        const filteredProducts = [...products].filter(product => {
+            return product.title.includes(searchTerm)
+        })
+        if(searchTerm.length < 3 ){
+            console.log(defaultProducts);
+            setProducts(defaultProducts)
+            
+        }else{
+            setProducts(filteredProducts)
+        }
+    }
+
+    useEffect(() => {
+        filterByTitle();
+    }, [searchTerm])
+
     return (
-        <section className='grid mx-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10'>
-            {
-                products?.map(product=>(
-                    <Card product={product} key={product.id}/>
-                ))
-            }
-        </section>
+        <>
+            <div className='flex gap-4 justify-center items-center w-full mx-auto pt-8'>
+                <label htmlFor="" className='text-slate-400 text-xl'> Search: </label>
+                <input
+                    type="text"
+                    onChange={e => setSearchTerm(e.target.value)}
+                    className='bg-slate-800 py-2 px-4 text-slate-400 rounded-lg'
+                />
+            </div>
+            <section className='grid mx-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6 mt-10'>
+
+                {
+                    products?.map((product: Product) => (
+                        <Card product={product} key={product.id} />
+                    ))
+                }
+            </section>
+        </>
     )
 }
 

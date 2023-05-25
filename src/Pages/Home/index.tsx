@@ -7,21 +7,6 @@ import ProductDetail from "../../components/Product/ProductDetail";
 
 function Home() {
   const { setProducts, products } = useContext(ShoppingCartContext);
-
-  const updateProducts = async () => {
-    try {
-      const dataProducts = await getProducts('products');
-      setProducts(dataProducts);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  useEffect(() => {
-    updateProducts()
-    return () => { }
-  }, [])
-
   return (
     <Layout title="Inicio">
       <CardList products={products} />

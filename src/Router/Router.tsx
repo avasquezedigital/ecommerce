@@ -4,7 +4,7 @@ import Home from '../Pages/Home';
 import NotFound from '../Pages/NotFound'
 import Account from '../Pages/Account'
 import MyOrders from '../Pages/Orders/MyOrders'
-import Order from '../Pages/Orders/Order'
+import Order from '../Pages/Orders/MyOrder'
 import SignIn from '../Pages/SignIn'
 import Categories from "../Pages/Categories";
 import ShoppingCartProvider from "../context/ShoppingCartProvider";
@@ -35,11 +35,15 @@ const AppRoutes = () => {
             element: <MyOrders />,
         },
         {
-            path: '/my-order',
+            path: '/my-orders/last',
             element: <Order />,
         },
         {
-            path: '/my-orders/last',
+            path: '/my-orders/:id',
+            element: <Order />,
+        },
+        {
+            path: '/my-order',
             element: <Order />,
         },
         {

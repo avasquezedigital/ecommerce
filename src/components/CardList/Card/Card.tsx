@@ -14,12 +14,12 @@ function Card({ product }: Props): React.JSX.Element {
       onClick={e => { openProductDetail(e, product) }}
       id={String(product.id)}
       className='card relative flex flex-col rounded-xl gap-3 bg-slate-800 border-2 border-slate-50/0 p-8 text-slate-400 cursor-pointer drop-shadow-lg'>
-      <figure className='relative h-30'>
+      <figure className='relative h-30 min-h-30'>
         <span className='category absolute top-2 left-2 z-10 bg-slate-100 py-1 px-2 text-xs rounded-md drop-shadow-sm'> {product.category.name} </span>
         <span className='absolute top-2 right-2 w-8 h-8 z-10 grid place-content-center bg-slate-800 py-1 px-2 text-xs rounded-full drop-shadow-sm'>c</span>
         <img className='h-full w-full object-cover rounded-xl' src={product.images[0]} alt="image" />
       </figure>
-      <h3 className='text-lg text-slate-200'>{product.title}{product.id} {product.state}</h3>
+      <h3 className='text-lg text-slate-200'>{product.title}</h3>
       <div className='divider w-full h-px bg-slate-700 my-2'></div>
       <p className='text-xs'>{product.description}</p>
       <div className="details flex flex-row gap-4 justify-between items-center text-slate-200">
