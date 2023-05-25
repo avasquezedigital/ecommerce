@@ -17,7 +17,7 @@ const ShoppingCartProvider = ({ children }: ProviderProps) => {
     const [cartProducts, setCartProducts] = useState<Product[]>([]);
     const [totalPrice, setTotalPrice] = useState<number>(0);
     const [products, setProducts] = useState<Product[]>(INITIAL_STATE);
-    const [defaultProducts, setDefaultProducts ] = useState<Product[]>([]);
+    const [defaultProducts, setDefaultProducts] = useState<Product[]>([]);
     const [productDetail, setProductDetail] = useState<ProductDetail>({
         isOpen: false,
         details: products[0]
@@ -82,11 +82,7 @@ const ShoppingCartProvider = ({ children }: ProviderProps) => {
         setCartOpen(isOpen ? false : true)
     }
 
-    const checkoutOrder = (e: React.MouseEvent<HTMLElement, MouseEvent>, order: Order) => {
-        setOrder(order);
-        setOrders([...orders, order])
-        setCartOpen(false);
-        setCartProducts([]);
+    const resetProducts = (products: Product[]) => {
         const updateProducts = [...products];
         const defaultStateProducts = updateProducts.map(p => {
             return { ...p, state: 'default' }
@@ -94,11 +90,28 @@ const ShoppingCartProvider = ({ children }: ProviderProps) => {
         setProducts(defaultStateProducts);
     }
 
+    const checkoutOrder = (e: React.MouseEvent<HTMLElement, MouseEvent>, order: Order) => {
+        setOrder(order);
+        setOrders([...orders, order])
+        setCartOpen(false);
+        setCartProducts([]);
+        resetProducts([...products]);
+        // const updateProducts = [...defaultProducts];
+        // const defaultStateProducts = updateProducts.map(p => {
+        //     return { ...p, state: 'default' }
+        // })
+        // setDefaultProducts([...defaultStateProducts])
+    }
+
     const updateProducts = async () => {
         try {
             const dataProducts = await getProducts('products');
             setProducts(dataProducts);
-            setDefaultProducts(dataProducts)
+            const updateProducts = [...dataProducts];
+            const defaultStateProducts = updateProducts.map(p => {
+                return { ...p, state: 'default' }
+            })
+            setDefaultProducts(defaultStateProducts)
         } catch (error) {
             console.log(error);
         }
@@ -110,7 +123,7 @@ const ShoppingCartProvider = ({ children }: ProviderProps) => {
 
     useEffect(() => {
         updateProducts()
-        return () => {}
+        return () => { }
     }, [])
 
     return (
@@ -130,6 +143,7 @@ const ShoppingCartProvider = ({ children }: ProviderProps) => {
             toggleCart,
             totalPrice,
             checkoutOrder,
+            resetProducts,
             order,
             orders
         }}>

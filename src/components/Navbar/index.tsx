@@ -16,19 +16,19 @@ function Navbar(): JSX.Element {
       text: "All",
     },
     {
-      to: "/clothes",
-      text: "Clothes",
+      to: "/shoes",
+      text: "Shoes",
     },
     {
       to: "/electronics",
       text: "Electronics",
     },
     {
-      to: "/fornitures",
-      text: "Fornitures",
+      to: "/furniture",
+      text: "Furnitures",
     },
     {
-      to: "/toys",
+      to: "/toy",
       text: "Toys",
     },
     {

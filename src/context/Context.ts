@@ -16,6 +16,7 @@ export interface ShoppingCart {
     clearCart: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
     toggleCart: (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void,
     totalPrice: number,
+    resetProducts: (products: Product[]) => void,
     checkoutOrder: (e: React.MouseEvent<HTMLElement, MouseEvent>, order: Order) => void,
     order: Order;
     orders: Order[];

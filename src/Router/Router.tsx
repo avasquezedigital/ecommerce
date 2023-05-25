@@ -8,6 +8,7 @@ import Order from '../Pages/Orders/MyOrder'
 import SignIn from '../Pages/SignIn'
 import Categories from "../Pages/Categories";
 import ShoppingCartProvider from "../context/ShoppingCartProvider";
+import Category from "../Pages/Categories/Category/Category";
 
 
 type Route = {
@@ -21,6 +22,10 @@ const AppRoutes = () => {
         {
             path: "/",
             element: <Home />
+        },
+        {
+            path: "/:category",
+            element: <Category />
         },
         {
             path: "/categories",
