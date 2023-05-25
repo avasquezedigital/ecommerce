@@ -17,6 +17,7 @@ const ShoppingCartProvider = ({ children }: ProviderProps) => {
     const [cartProducts, setCartProducts] = useState<Product[]>([]);
     const [totalPrice, setTotalPrice] = useState<number>(0);
     const [products, setProducts] = useState<Product[]>(INITIAL_STATE);
+    const [defaultProducts, setDefaultProducts ] = useState<Product[]>([]);
     const [productDetail, setProductDetail] = useState<ProductDetail>({
         isOpen: false,
         details: products[0]
@@ -97,6 +98,7 @@ const ShoppingCartProvider = ({ children }: ProviderProps) => {
         try {
             const dataProducts = await getProducts('products');
             setProducts(dataProducts);
+            setDefaultProducts(dataProducts)
         } catch (error) {
             console.log(error);
         }
@@ -114,6 +116,7 @@ const ShoppingCartProvider = ({ children }: ProviderProps) => {
     return (
         <ShoppingCartContext.Provider value={{
             products,
+            defaultProducts,
             setProducts,
             cartOpen,
             cartProducts,

@@ -5,18 +5,15 @@ import Card from './Card/Card'
 function CardList() {
 
     const [searchTerm, setSearchTerm] = useState<string>('');
-    const { setProducts, products } = useContext(ShoppingCartContext);
+    const { setProducts, products, defaultProducts } = useContext(ShoppingCartContext);
 
     const filterByTitle = () => {
-        const defaultProducts = [...products];
         const filteredProducts = [...products].filter(product => {
             return product.title.includes(searchTerm)
         })
-        if(searchTerm.length < 3 ){
-            console.log(defaultProducts);
+        if (searchTerm.length < 3) {
             setProducts(defaultProducts)
-            
-        }else{
+        } else {
             setProducts(filteredProducts)
         }
     }
@@ -38,9 +35,13 @@ function CardList() {
             <section className='grid mx-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6 mt-10'>
 
                 {
-                    products?.map((product: Product) => (
-                        <Card product={product} key={product.id} />
-                    ))
+                    !products.length
+                        ?
+                        <p className="text-sm font-light text-slate text-slate-500">No se encontraron productos con el titulo: { searchTerm }</p>
+                        :
+                        products?.map((product: Product) => (
+                            <Card product={product} key={product.id} />
+                        ))
                 }
             </section>
         </>

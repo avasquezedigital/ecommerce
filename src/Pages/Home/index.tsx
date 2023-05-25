@@ -6,10 +6,9 @@ import ShoppingCartContext from "../../context/Context";
 import ProductDetail from "../../components/Product/ProductDetail";
 
 function Home() {
-  const { setProducts, products } = useContext(ShoppingCartContext);
   return (
     <Layout title="Inicio">
-      <CardList products={products} />
+      <CardList />
       <ProductDetail />
     </Layout>
   )

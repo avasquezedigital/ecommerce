@@ -3,6 +3,7 @@ import { ProductDetail } from "./ShoppingCartProvider";
 
 export interface ShoppingCart {
     products: Product[],
+    defaultProducts: Product[],
     setProducts: React.Dispatch<React.SetStateAction<Product[]>>,
     cartOpen: boolean,
     cartProducts: Product[],
