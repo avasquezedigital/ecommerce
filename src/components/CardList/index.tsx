@@ -9,7 +9,26 @@ type Props = {
 function CardList({ location }: Props) {
 
     const [searchTerm, setSearchTerm] = useState<string>('');
-    const { setProducts, products, defaultProducts, resetProducts, orders } = useContext(ShoppingCartContext);
+    const { setProducts, products, defaultProducts, filteredProducts, setFilteredProducts } = useContext(ShoppingCartContext);
+
+    const filterByTitle = (location: string) => {
+        const filterProducts = [...products].filter(product => {
+            return product.title.toLowerCase().includes(searchTerm.toLowerCase())
+        })
+        const filterProductsCategory = [...products].filter(product => {
+            return product.title.toLowerCase().includes(searchTerm.toLowerCase()) && product.category.name.toLowerCase() === location.toLowerCase();
+        })
+
+        if (searchTerm.length < 3) {
+            setFilteredProducts([]);
+        } else {
+            if (location.toLowerCase() === '/' || location.toLowerCase() === 'all') {
+                setFilteredProducts(filterProducts)
+            } else {
+                setFilteredProducts(filterProductsCategory)
+            }
+        }
+    }
 
     const filterCategoryProducts = (): Product[] => {
         const newProducts = [...defaultProducts];
@@ -23,45 +42,24 @@ function CardList({ location }: Props) {
         }
     }
 
-    const filterByTitle = (location: string) => {
-        const filteredProducts = [...products].filter(product => {
-            return product.title.toLowerCase().includes(searchTerm.toLowerCase())
-        })
-        const filteredProductsCategory = [...filteredProducts].filter(product => {
-            return product.title.toLowerCase().includes(searchTerm.toLowerCase()) && product.category.name.toLowerCase() === location.toLowerCase();
-        })
-        if (searchTerm.length < 3) {
-            if (location.toLowerCase() === '/' || location.toLowerCase() === 'all') {
-                setProducts(defaultProducts)
-            } else {
-                setProducts(filterCategoryProducts())
-            }
-        } else {
-            if (location.toLowerCase() === '/' || location.toLowerCase() === 'all') {
-                setProducts(filteredProducts)
-            } else {
-                setProducts(filteredProductsCategory)
-            }
-        }
-    }
-
     useEffect(() => {
         filterByTitle(location);
         return () => { }
     }, [searchTerm])
 
+
     const dataCards = () => {
         if (location.toLowerCase() === '/' || location.toLowerCase() === 'all') {
-            setProducts(defaultProducts)
+            setProducts(defaultProducts);
         } else {
             setProducts(filterCategoryProducts())
         }
-
     }
 
     useEffect(() => {
-        dataCards();
+        setFilteredProducts([]);
     }, [location])
+
 
     useEffect(() => {
         dataCards();
@@ -78,14 +76,18 @@ function CardList({ location }: Props) {
                 />
             </div>
             <section className='grid mx-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-10'>
+                {filteredProducts.length}
                 {
-                    !products.length
-                        ?
-                        <p className="text-sm font-light text-slate text-slate-500">No se encontraron productos con el titulo: {searchTerm}</p>
-                        :
-                        products?.map((product: Product) => (
+
+                    filteredProducts.length > 0 ?
+                        filteredProducts.map((product: Product) => (
                             <Card product={product} key={product.id} />
                         ))
+                        :
+                        products.map((product: Product) => (
+                            <Card product={product} key={product.id} />
+                        ))
+
                 }
             </section>
         </>

@@ -4,6 +4,8 @@ import { ProductDetail } from "./ShoppingCartProvider";
 export interface ShoppingCart {
     products: Product[],
     defaultProducts: Product[],
+    filteredProducts: Product[], 
+    setFilteredProducts: React.Dispatch<React.SetStateAction<Product[]>>,
     setProducts: React.Dispatch<React.SetStateAction<Product[]>>,
     cartOpen: boolean,
     cartProducts: Product[],

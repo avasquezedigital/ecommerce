@@ -18,6 +18,7 @@ const ShoppingCartProvider = ({ children }: ProviderProps) => {
     const [totalPrice, setTotalPrice] = useState<number>(0);
     const [products, setProducts] = useState<Product[]>(INITIAL_STATE);
     const [defaultProducts, setDefaultProducts] = useState<Product[]>([]);
+    const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
     const [productDetail, setProductDetail] = useState<ProductDetail>({
         isOpen: false,
         details: products[0]
@@ -96,11 +97,11 @@ const ShoppingCartProvider = ({ children }: ProviderProps) => {
         setCartOpen(false);
         setCartProducts([]);
         resetProducts([...products]);
-        // const updateProducts = [...defaultProducts];
-        // const defaultStateProducts = updateProducts.map(p => {
-        //     return { ...p, state: 'default' }
-        // })
-        // setDefaultProducts([...defaultStateProducts])
+        const updateProducts = [...defaultProducts];
+        const defaultStateProducts = updateProducts.map(p => {
+            return { ...p, state: 'default' }
+        })
+        setDefaultProducts([...defaultStateProducts])
     }
 
     const updateProducts = async () => {
@@ -131,6 +132,8 @@ const ShoppingCartProvider = ({ children }: ProviderProps) => {
             products,
             defaultProducts,
             setProducts,
+            filteredProducts,
+            setFilteredProducts,
             cartOpen,
             cartProducts,
             setCartProducts,
