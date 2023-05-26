@@ -76,7 +76,6 @@ function CardList({ location }: Props) {
                 />
             </div>
             <section className='grid mx-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-10'>
-                {filteredProducts.length}
                 {
 
                     filteredProducts.length > 0 ?

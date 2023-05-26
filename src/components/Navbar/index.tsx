@@ -36,7 +36,7 @@ function Navbar(): JSX.Element {
       text: "Others",
     }
   ];
-  const [menu, setMenu] = useState<NavItem[]>(defaultMenu);
+  const [menu] = useState<NavItem[]>(defaultMenu);
 
   return (
     <nav className="flex items-center">

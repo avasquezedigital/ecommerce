@@ -3,10 +3,9 @@ import ShoppingCartContext from "../../../context/Context";
 import Layout from "../../../layout/Layout";
 import OrderCard from '../../../components/Orders/OrderCard/OrderCard';
 import { Link, Location, useLocation } from 'react-router-dom';
-import CardList from '../../../components/CardList';
 
 function Order(): React.JSX.Element {
-  const { orders, products, setProducts } = useContext(ShoppingCartContext);
+  const { orders } = useContext(ShoppingCartContext);
   const [currentOrder, setCurrentOrder] = useState<Order>(orders[orders.length - 1]);
   const location: Location = useLocation();
   const getCurrentOrder = () => {

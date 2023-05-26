@@ -33,18 +33,18 @@ export const getProducts = async (path: string = 'products') => {
             }
             return newProduct;
         });
-        const dataBeauty = copyData.map((p: Product) => {
-            let newProduct: Product = {
-                id: p.id,
-                title: 'Macbook Pro 13',
-                description: 'Non est consequat cupidatat esse. Id incididunt ea ullamco aliqua mollit velit qui id consequat ea. Excepteur et incididunt nostrud excepteur.',
-                images: ['https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 'https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 'https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'],
-                price: 231000,
-                category: p.category,
-                state: 'default'
-            }
-            return newProduct;
-        })
+        // const dataBeauty = copyData.map((p: Product) => {
+        //     let newProduct: Product = {
+        //         id: p.id,
+        //         title: 'Macbook Pro 13',
+        //         description: 'Non est consequat cupidatat esse. Id incididunt ea ullamco aliqua mollit velit qui id consequat ea. Excepteur et incididunt nostrud excepteur.',
+        //         images: ['https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 'https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 'https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'],
+        //         price: 231000,
+        //         category: p.category,
+        //         state: 'default'
+        //     }
+        //     return newProduct;
+        // })
         return dataAPI
     } catch (error) {
         console.log(error);

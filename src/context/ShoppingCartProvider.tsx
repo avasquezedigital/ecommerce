@@ -79,6 +79,7 @@ const ShoppingCartProvider = ({ children }: ProviderProps) => {
     }
 
     const toggleCart = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+        console.log(e);
         let isOpen = cartOpen;
         setCartOpen(isOpen ? false : true)
     }
@@ -92,6 +93,7 @@ const ShoppingCartProvider = ({ children }: ProviderProps) => {
     }
 
     const checkoutOrder = (e: React.MouseEvent<HTMLElement, MouseEvent>, order: Order) => {
+        console.log(e);
         setOrder(order);
         setOrders([...orders, order])
         setCartOpen(false);

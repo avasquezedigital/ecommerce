@@ -1,11 +1,11 @@
-import React, { useState, useContext } from 'react'
+import { useContext } from 'react'
 import { ShoppingCartIcon } from '@heroicons/react/24/outline'
 import ShoppingCartContext from '../../../../context/Context';
 import MiniCart from './MiniCart';
 
 function Cart() {
 
-    const { cartProducts, setCartProducts, cartOpen, toggleCart } = useContext(ShoppingCartContext);
+    const { cartProducts, toggleCart } = useContext(ShoppingCartContext);
     return (
         <>
             <span onClick={e => toggleCart(e)} className='relative w-8 h-8 cursor-pointer bg-lime-400 rounded-full text-slate-800 grid place-content-center drop-shadow-xl'>

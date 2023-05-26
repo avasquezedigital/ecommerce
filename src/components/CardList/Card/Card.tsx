@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import ShoppingCartContext from '../../../context/Context';
 import { PlusIcon, MinusIcon } from '@heroicons/react/24/outline'
 
